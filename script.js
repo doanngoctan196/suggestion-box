@@ -155,11 +155,6 @@
       }catch(e){ state.canEdit = false; }
     }
     els.adminTabBtn.style.display = state.canEdit ? '' : 'none';
-
-    if(!state.db){
-      showMsg('formMsg','err','Không thể kết nối kho dữ liệu. Vui lòng thử tải lại trang.');
-      els.submitBtn.disabled = true;
-    }
   }
 
   // ---------- submit ----------
