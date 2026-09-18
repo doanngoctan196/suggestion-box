@@ -1,1 +1,108 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Hộp Ý Kiến Xưởng May</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<header class="top">
+  <div class="wrap">
+    <h1>Hộp Ý Kiến Xưởng May</h1>
+    <p>Nơi công nhân gửi phản ánh, đề xuất — có thể gửi ẩn danh</p>
+    <div class="stitch"></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav class="tabs" id="tabs">
+    <button type="button" class="active" data-tab="submit">Đóng góp ý kiến</button>
+    <button type="button" data-tab="admin" id="adminTabBtn" style="display:none;">Xem ý kiến</button>
+  </nav>
+
+  <!-- SUBMIT VIEW -->
+  <section class="view active" id="view-submit">
+    <div class="card">
+      <form id="form">
+        <div class="anon-row">
+          <input type="checkbox" id="anonChk">
+          <div>
+            <label for="anonChk">Gửi ẩn danh</label>
+            <div class="hint">Nếu chọn, hệ thống sẽ không lưu Mã số nhân viên và Họ tên của bạn.</div>
+          </div>
+        </div>
+
+        <div class="id-fields" id="idFields">
+          <div class="field">
+            <label for="msnv">Mã số nhân viên (MSNV)</label>
+            <input type="text" id="msnv" placeholder="VD: NV0231" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="hoten">Họ và tên</label>
+            <input type="text" id="hoten" placeholder="Nguyễn Văn A" autocomplete="off">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="ykien">Ý kiến / phản ánh của bạn <span style="color:var(--accent)">*</span></label>
+          <textarea id="ykien" placeholder="Mô tả cụ thể vấn đề hoặc đề xuất của bạn..." required></textarea>
+        </div>
+
+        <div class="upload-row">
+          <div class="upload-box" id="imgBox">
+            <input type="file" accept="image/png,image/jpeg,image/webp,image/gif" id="imgInput">
+            <span class="ico">🖼️</span>
+            <span class="lbl">Thêm hình ảnh</span>
+            <span class="sub">Tối đa 20MB</span>
+          </div>
+          <div class="upload-box" id="vidBox">
+            <input type="file" accept="video/mp4,video/webm" id="vidInput">
+            <span class="ico">🎬</span>
+            <span class="lbl">Thêm video ngắn</span>
+            <span class="sub">MP4/WebM, tối đa 20MB</span>
+          </div>
+        </div>
+        <div id="imgPreviewWrap" class="preview-wrap" style="display:none;">
+          <img id="imgPreview" alt="Xem trước ảnh">
+          <button type="button" class="clear-file" data-clear="img">Xoá ảnh</button>
+        </div>
+        <div id="vidPreviewWrap" class="preview-wrap" style="display:none;">
+          <video id="vidPreview" controls></video>
+          <button type="button" class="clear-file" data-clear="vid">Xoá video</button>
+        </div>
+
+        <button type="submit" class="submit" id="submitBtn">Gửi ý kiến</button>
+        <div class="msg" id="formMsg"></div>
+      </form>
+    </div>
+    <p class="footnote">Ý kiến của bạn chỉ được xem bởi quản lý phụ trách.</p>
+  </section>
+
+  <!-- ADMIN VIEW -->
+  <section class="view" id="view-admin">
+    <div id="adminLocked" class="locked" style="display:none;">
+      <span class="ico">🔒</span>
+      Chỉ quản lý mới có thể xem danh sách ý kiến.
+    </div>
+    <div id="adminContent" style="display:none;">
+      <div class="admin-head">
+        <h2>Ý kiến đã gửi</h2>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span class="count-pill" id="countPill">0</span>
+          <button type="button" id="exportCsvBtn" style="font-size:12.5px; font-weight:600; border-radius:6px; border:1px solid var(--border); background:var(--panel-2); color:var(--ink); padding:6px 10px; cursor:pointer;">⬇ Tải CSV</button>
+        </div>
+      </div>
+      <p class="footnote" style="margin-top:-8px; margin-bottom:14px; text-align:left;">Mở Google Sheet → File → Import → tải lên file CSV này để đưa dữ liệu vào bảng tính của bạn.</p>
+      <div id="adminList"></div>
+    </div>
+  </section>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
